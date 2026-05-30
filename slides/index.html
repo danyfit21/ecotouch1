@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecotouch — Slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  deck-stage:not(:defined){visibility:hidden}
+  html,body{margin:0;background:#06121f}
+  section{
+    font-family:var(--font-brand);
+    color:var(--fg);
+    background:#fff;
+    overflow:hidden;
+  }
+  .pad{position:absolute;inset:0;padding:110px 120px;display:flex;flex-direction:column;box-sizing:border-box}
+  .eyebrow{font-weight:700;font-size:26px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .grad-text{background:var(--eco-gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .dark{background:var(--eco-azul-oscuro);color:#fff}
+  .dark .eyebrow{color:var(--eco-verde)}
+  .chip{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:24px;padding:14px 28px;border-radius:999px}
+
+  /* ---- S1 title ---- */
+  .s1-bg{position:absolute;inset:0;background:
+     radial-gradient(900px 620px at 88% -8%, rgba(28,247,153,.16), transparent 60%),
+     radial-gradient(900px 620px at 4% 108%, rgba(43,131,237,.20), transparent 60%)}
+  .s1-iso{position:absolute;right:-120px;bottom:-160px;width:760px;opacity:.10}
+
+  /* ---- stat ---- */
+  .stat-n{font-weight:700;font-size:118px;line-height:1;letter-spacing:-.02em}
+  .stat-c{font-size:30px;color:#bcd3e8;margin-top:14px}
+
+  /* ---- compare card ---- */
+  .cc{flex:1;border-radius:34px;padding:64px;box-sizing:border-box;display:flex;flex-direction:column}
+  .cc h3{font-weight:700;font-size:56px;margin:26px 0 18px;letter-spacing:-.02em}
+  .cc p{font-size:30px;line-height:1.5;margin:0 0 36px}
+  .cc li{font-size:28px;display:flex;gap:18px;align-items:center;margin-bottom:20px}
+  .tick{width:40px;height:40px;border-radius:50%;background:var(--eco-verde);flex:none;display:flex;align-items:center;justify-content:center;color:#063a26;font-weight:700;font-size:22px}
+</style>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section data-label="Title">
+    <div class="s1-bg"></div>
+    <img class="s1-iso" src="../assets/isotipo-color.png" alt="">
+    <div class="pad" style="justify-content:space-between">
+      <img src="../assets/logo-h-blanco.png" alt="Ecotouch" style="height:64px;align-self:flex-start">
+      <div>
+        <div class="eyebrow">Manual de marca · Sistema de diseño</div>
+        <h1 style="font-weight:700;font-size:130px;line-height:1.02;letter-spacing:-.03em;margin:30px 0 28px;color:var(--fg-strong)">
+          Tecnología de vanguardia,<br><span class="grad-text">sin complicaciones.</span>
+        </h1>
+        <p style="font-weight:300;font-size:38px;line-height:1.5;color:var(--fg-muted);max-width:1180px;margin:0">
+          El puente entre la tecnología y las soluciones sostenibles —
+          pantallas interactivas y energía solar para instituciones y empresas del Ecuador.
+        </p>
+      </div>
+      <div style="display:flex;gap:16px">
+        <span class="chip" style="background:var(--eco-gradient);color:#fff">Innovación</span>
+        <span class="chip" style="background:rgba(28,247,153,.18);color:var(--verde-700)">Sostenibilidad</span>
+        <span class="chip" style="background:rgba(43,131,237,.12);color:var(--azul-600)">Confianza</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · SECTION DIVIDER -->
+  <section data-label="Section" class="dark">
+    <div class="s1-bg"></div>
+    <img class="s1-iso" src="../assets/isotipo-mono-4.png" alt="" style="opacity:.14">
+    <div class="pad" style="justify-content:center">
+      <div class="eyebrow">01 · Nuestra promesa</div>
+      <h2 style="font-weight:700;font-size:104px;line-height:1.05;letter-spacing:-.02em;margin:24px 0 0;max-width:1400px">
+        Somos el <span class="grad-text">puente</span> entre el cliente y la tecnología que necesita.
+      </h2>
+      <p style="font-weight:300;font-size:38px;line-height:1.5;color:#bcd3e8;max-width:1200px;margin:36px 0 0">
+        La buscamos al mejor precio y garantía, la importamos y hacemos todo el proceso —aduanas,
+        impuestos, instalación— para entregártela lista en las manos.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3 · STATS -->
+  <section data-label="Stats" class="dark">
+    <div class="s1-bg"></div>
+    <div class="pad">
+      <div class="eyebrow">02 · Trayectoria en Ecuador</div>
+      <h2 style="font-weight:700;font-size:84px;letter-spacing:-.02em;margin:22px 0 70px;color:#fff">Seis años transformando aulas</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:48px;flex:1;align-content:center">
+        <div><div class="stat-n grad-text">100k</div><div class="stat-c">Alumnos beneficiados</div></div>
+        <div><div class="stat-n grad-text">+700</div><div class="stat-c">Pantallas entregadas</div></div>
+        <div><div class="stat-n grad-text">+40</div><div class="stat-c">Instituciones atendidas</div></div>
+        <div><div class="stat-n grad-text">24 h</div><div class="stat-c">Resolución de soporte</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · COMPARISON -->
+  <section data-label="Comparison">
+    <div class="pad">
+      <div class="eyebrow">03 · Áreas de servicio</div>
+      <h2 style="font-weight:700;font-size:80px;letter-spacing:-.02em;margin:20px 0 50px;color:var(--fg-strong)">Dos áreas, un compromiso</h2>
+      <div style="display:flex;gap:40px;flex:1">
+        <div class="cc" style="background:var(--gris-50);border:1px solid var(--border)">
+          <div style="width:104px;height:104px;border-radius:28px;background:var(--eco-gradient);display:flex;align-items:center;justify-content:center"><i data-lucide="monitor" style="width:54px;height:54px;color:#fff"></i></div>
+          <h3 style="color:var(--fg-strong)">Pantallas interactivas</h3>
+          <p style="color:var(--fg-muted)">Transformamos aulas y salas de reunión en espacios tecnológicos.</p>
+          <ul style="list-style:none;padding:0;margin:auto 0 0">
+            <li><span class="tick">✓</span>Capacitación docente gratuita</li>
+            <li><span class="tick">✓</span>Recursos interactivos</li>
+            <li><span class="tick">✓</span>Servicio técnico 24 h</li>
+          </ul>
+        </div>
+        <div class="cc dark">
+          <div style="width:104px;height:104px;border-radius:28px;background:var(--eco-gradient);display:flex;align-items:center;justify-content:center"><i data-lucide="sun" style="width:54px;height:54px;color:#fff"></i></div>
+          <h3 style="color:#fff">Sistemas solares</h3>
+          <p style="color:#bcd3e8">Evaluación técnica, presupuesto y ejecución para empresas e instituciones.</p>
+          <ul style="list-style:none;padding:0;margin:auto 0 0">
+            <li style="color:#dbe8f4"><span class="tick">✓</span>Evaluación técnica</li>
+            <li style="color:#dbe8f4"><span class="tick">✓</span>Ejecución llave en mano</li>
+            <li style="color:#dbe8f4"><span class="tick">✓</span>Ahorro a largo plazo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · QUOTE -->
+  <section data-label="Quote">
+    <div class="s1-bg"></div>
+    <div class="pad" style="justify-content:center;align-items:flex-start">
+      <img src="../assets/isotipo-color.png" alt="" style="width:130px;margin-bottom:46px">
+      <blockquote style="font-weight:300;font-size:96px;line-height:1.12;letter-spacing:-.02em;color:var(--fg-strong);margin:0;max-width:1480px">
+        Haz tu vida sencilla,<br><span style="font-weight:700" class="grad-text">hazlo con Ecotouch.</span>
+      </blockquote>
+      <div style="margin-top:54px;font-size:30px;font-weight:700;color:var(--fg-muted)">Slogan de marca</div>
+    </div>
+  </section>
+
+  <!-- 6 · CLOSING -->
+  <section data-label="Closing" class="dark">
+    <div class="s1-bg"></div>
+    <img class="s1-iso" src="../assets/isotipo-mono-2.png" alt="" style="opacity:.14">
+    <div class="pad" style="justify-content:center">
+      <img src="../assets/logo-h-blanco.png" alt="Ecotouch" style="height:72px;align-self:flex-start;margin-bottom:50px">
+      <h2 style="font-weight:700;font-size:96px;letter-spacing:-.02em;margin:0;max-width:1300px">¿Empezamos tu proyecto?</h2>
+      <p style="font-weight:300;font-size:38px;color:#bcd3e8;margin:30px 0 56px">Cuéntanos qué necesitas y te enviamos una cotización sin compromiso.</p>
+      <div style="display:flex;gap:46px;font-size:30px;font-weight:700">
+        <span style="display:flex;align-items:center;gap:16px"><i data-lucide="globe" style="width:38px;height:38px;color:var(--eco-verde)"></i>ecotouch.ec</span>
+        <span style="display:flex;align-items:center;gap:16px"><i data-lucide="mail" style="width:38px;height:38px;color:var(--eco-verde)"></i>hola@ecotouch.ec</span>
+        <span style="display:flex;align-items:center;gap:16px"><i data-lucide="map-pin" style="width:38px;height:38px;color:var(--eco-verde)"></i>Quito, Ecuador</span>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+<script>
+  function hydrate(){ if(window.lucide) window.lucide.createIcons(); }
+  hydrate();
+  document.querySelector('deck-stage').addEventListener('slidechange', hydrate);
+  setTimeout(hydrate, 400);
+</script>
+</body>
+</html>

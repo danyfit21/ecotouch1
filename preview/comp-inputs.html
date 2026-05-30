@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{font-family:"Comfortaa","Segoe UI",system-ui,sans-serif;background:var(--bg);padding:24px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{display:block;font-size:12px;font-weight:700;color:var(--fg-strong);margin-bottom:6px}
+  .field{font-family:"Comfortaa","Segoe UI",system-ui,sans-serif;font-size:14px;width:100%;box-sizing:border-box;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-md);color:var(--fg);background:#fff;outline:none}
+  .field::placeholder{color:var(--fg-subtle)}
+  .focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(43,131,237,.18)}
+  .hint{font-size:11px;color:var(--fg-subtle);margin-top:5px}
+  .chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--fg)}
+  .box{width:20px;height:20px;border-radius:6px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+  .toggle{width:42px;height:24px;border-radius:999px;background:var(--accent);position:relative}
+  .toggle::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;right:3px}
+</style>
+</head>
+<body>
+  <div><label>Nombre</label><input class="field" placeholder="Tu nombre"></div>
+  <div><label>Correo (activo)</label><input class="field focus" value="hola@institucion.edu.ec"></div>
+  <div><label>Servicio</label><select class="field"><option>Pantallas interactivas</option><option>Paneles solares</option></select></div>
+  <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+    <div class="chk"><span class="box">&#10003;</span> Acepto ser contactado</div>
+    <div class="chk"><span class="toggle"></span> Recibir novedades</div>
+  </div>
+</body>
+</html>

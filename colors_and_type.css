@@ -1,0 +1,271 @@
+/* ============================================================
+   ECOTOUCH — Colors & Type foundations
+   Source: Manual de Identidad Corporativa (Ecotouch)
+   Brand colors (exact, from manual p.12):
+     Verde  #1cf799   Azul #2b83ed   Azul oscuro #002f56   Gris #e1e2e4
+   Primary typeface: Comfortaa (self-hosted + Google Fonts fallback)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+/* ---------- Webfont: Comfortaa — local self-host (5 static weights) ---------- */
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa Light"), local("Comfortaa-Light"),
+       url("fonts/Comfortaa-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa Regular"), local("Comfortaa-Regular"), local("Comfortaa"),
+       url("fonts/Comfortaa-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa Medium"), local("Comfortaa-Medium"),
+       url("fonts/Comfortaa-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa SemiBold"), local("Comfortaa-SemiBold"),
+       url("fonts/Comfortaa-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comfortaa";
+  src: local("Comfortaa Bold"), local("Comfortaa-Bold"),
+       url("fonts/Comfortaa-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ============ CORE BRAND PALETTE (exact) ============ */
+  --eco-verde:        #1cf799;  /* señal / energía / sostenibilidad */
+  --eco-azul:         #2b83ed;  /* tecnología / acción / enlaces    */
+  --eco-azul-oscuro:  #002f56;  /* texto principal / fondos profundos */
+  --eco-gris:         #e1e2e4;  /* superficies neutras / divisores   */
+
+  /* The signature isotype gradient (verde → azul) */
+  --eco-gradient:        linear-gradient(135deg, var(--eco-verde) 0%, var(--eco-azul) 100%);
+  --eco-gradient-soft:   linear-gradient(135deg, #5bf9b3 0%, #5ba3f2 100%);
+  --eco-gradient-deep:   linear-gradient(135deg, #14c97b 0%, #1e62c4 100%);
+
+  /* ============ VERDE SCALE (tints/shades, oklch-derived) ============ */
+  --verde-50:  #e9fdf4;
+  --verde-100: #c9fbe3;
+  --verde-200: #93f7c8;
+  --verde-300: #54f2ac;
+  --verde-400: #1cf799;  /* brand */
+  --verde-500: #12d07e;
+  --verde-600: #0ea868;
+  --verde-700: #0c8252;
+  --verde-800: #0b6743;
+  --verde-900: #094f35;
+
+  /* ============ AZUL SCALE ============ */
+  --azul-50:  #eaf3fe;
+  --azul-100: #d0e3fc;
+  --azul-200: #a3c8f8;
+  --azul-300: #6ba6f2;
+  --azul-400: #2b83ed;  /* brand */
+  --azul-500: #1e6ed6;
+  --azul-600: #1858b0;
+  --azul-700: #14478c;
+  --azul-800: #103a70;
+  --azul-900: #002f56;  /* = azul oscuro brand */
+
+  /* ============ NEUTRAL / GRIS SCALE ============ */
+  --gris-0:   #ffffff;
+  --gris-50:  #f6f7f9;
+  --gris-100: #eef0f2;
+  --gris-200: #e1e2e4;  /* brand gris */
+  --gris-300: #cdd0d4;
+  --gris-400: #a9aeb5;
+  --gris-500: #7e848d;
+  --gris-600: #585e67;
+  --gris-700: #3c424b;
+  --gris-800: #1f2a36;
+  --gris-900: #0c1822;
+
+  /* ============ SEMANTIC TOKENS ============ */
+  /* Backgrounds */
+  --bg:            var(--gris-0);
+  --bg-subtle:     var(--gris-50);
+  --bg-muted:      var(--gris-100);
+  --bg-inverse:    var(--eco-azul-oscuro);
+
+  /* Foreground / text */
+  --fg:            var(--eco-azul-oscuro);   /* default body text  */
+  --fg-strong:     #001b33;                  /* headings           */
+  --fg-muted:      var(--gris-600);          /* secondary text     */
+  --fg-subtle:     var(--gris-500);          /* captions, hints    */
+  --fg-on-dark:    #ffffff;
+  --fg-on-accent:  #ffffff;
+
+  /* Brand / interactive */
+  --accent:        var(--eco-azul);          /* primary action     */
+  --accent-hover:  var(--azul-500);
+  --accent-press:  var(--azul-600);
+  --accent-2:      var(--eco-verde);         /* secondary / energy */
+  --accent-2-ink:  var(--verde-700);         /* verde text on light*/
+  --link:          var(--eco-azul);
+
+  /* Lines & surfaces */
+  --border:        var(--gris-200);
+  --border-strong: var(--gris-300);
+  --surface:       #ffffff;
+  --surface-raised:#ffffff;
+
+  /* Status */
+  --success:       var(--verde-600);
+  --info:          var(--eco-azul);
+  --warning:       #f0a000;
+  --danger:        #e2452f;
+
+  /* ============ TYPOGRAPHY ============ */
+  --font-brand: "Comfortaa", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-sans:  "Comfortaa", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  /* Body fallback for dense/long copy where Comfortaa runs wide */
+  --font-text:  "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Type scale (1.250 major-third, 16px base) */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-lg:   1.25rem;   /* 20 */
+  --text-xl:   1.563rem;  /* 25 */
+  --text-2xl:  1.953rem;  /* 31 */
+  --text-3xl:  2.441rem;  /* 39 */
+  --text-4xl:  3.052rem;  /* 49 */
+  --text-5xl:  3.815rem;  /* 61 */
+
+  --leading-tight: 1.1;
+  --leading-snug:  1.25;
+  --leading-normal:1.5;
+  --leading-relaxed:1.65;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.12em;
+
+  /* ============ RADII ============ */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ============ SHADOWS / ELEVATION ============ */
+  --shadow-xs: 0 1px 2px rgba(0, 47, 86, 0.06);
+  --shadow-sm: 0 2px 8px rgba(0, 47, 86, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 47, 86, 0.10);
+  --shadow-lg: 0 18px 48px rgba(0, 47, 86, 0.14);
+  --shadow-accent: 0 10px 30px rgba(43, 131, 237, 0.30);
+  --shadow-verde:  0 10px 30px rgba(28, 247, 153, 0.28);
+
+  /* ============ SPACING (4px base) ============ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ============ MOTION ============ */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+}
+
+/* ============ GLOBAL TYPE RENDERING ============ */
+html {
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============ SEMANTIC ELEMENT STYLES ============ */
+.eco-h1 {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-strong);
+}
+.eco-h2 {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-strong);
+}
+.eco-h3 {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  color: var(--fg-strong);
+}
+.eco-h4 {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--fg-strong);
+}
+.eco-lead {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-light);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-muted);
+}
+.eco-body {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-regular);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--fg);
+}
+.eco-small {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-regular);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--fg-muted);
+}
+.eco-overline {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}

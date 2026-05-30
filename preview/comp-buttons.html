@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{font-family:"Comfortaa","Segoe UI",system-ui,sans-serif;background:var(--bg);padding:24px;box-sizing:border-box}
+  .grid{display:flex;flex-direction:column;gap:14px}
+  .line{display:flex;gap:12px;align-items:center}
+  button{font-family:"Comfortaa","Segoe UI",system-ui,sans-serif;font-weight:700;font-size:14px;border:0;cursor:pointer;border-radius:var(--radius-pill);padding:11px 22px;transition:all var(--dur-fast) var(--ease-out)}
+  .primary{background:var(--accent);color:#fff;box-shadow:var(--shadow-accent)}
+  .grad{background:var(--eco-gradient);color:#fff}
+  .verde{background:var(--accent-2);color:#063a26}
+  .ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+  .quiet{background:var(--gris-100);color:var(--fg-strong)}
+  .dark{background:var(--eco-azul-oscuro);color:#fff}
+  .sm{padding:8px 16px;font-size:13px}
+  .lg{padding:14px 28px;font-size:16px}
+  .lab{font-size:10px;color:var(--fg-subtle);letter-spacing:.04em;text-transform:uppercase;width:62px}
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="line"><span class="lab">Variantes</span>
+      <button class="primary">Cotizar ahora</button>
+      <button class="grad">Empezar</button>
+      <button class="verde">Ver más</button>
+      <button class="ghost">Contacto</button>
+      <button class="quiet">Cancelar</button>
+    </div>
+    <div class="line"><span class="lab">Tamaños</span>
+      <button class="primary sm">Pequeño</button>
+      <button class="primary">Mediano</button>
+      <button class="primary lg">Grande</button>
+      <button class="dark">En oscuro</button>
+    </div>
+  </div>
+</body>
+</html>

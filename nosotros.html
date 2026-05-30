@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nosotros — EcoTouch</title>
+<meta name="description" content="Más que proveedores, aliados estratégicos. Conoce el equipo y la historia de EcoTouch: 6 años conectando instituciones del Ecuador con tecnología de vanguardia." />
+<link rel="icon" type="image/png" href="assets/isotipo-color.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+.page-hero {
+  position: relative; padding: 9rem 0 5rem;
+  background: var(--gradient-hero); overflow: hidden;
+}
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(28,247,153,0.1) 0%, transparent 60%); }
+.page-hero .container { position: relative; z-index: 2; text-align: center; }
+.page-hero h1 { margin: 1rem 0 1.2rem; }
+.page-hero p { color: var(--color-text-light); max-width: 720px; margin: 0 auto; font-size: 1.05rem; }
+
+.manifest-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.manifest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.manifest-text h2 { margin: 1rem 0 1.5rem; line-height: 1.15; }
+.manifest-text p { color: var(--color-text-light); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.7; }
+.manifest-text p.lead { font-size: 1.2rem; color: white; font-weight: 500; }
+.manifest-image { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; box-shadow: 0 20px 60px -20px rgba(43,131,237,0.5); }
+.manifest-image img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) { .manifest-grid { grid-template-columns: 1fr; gap: 2.5rem; } .manifest-image { aspect-ratio: 4/3; } }
+
+.values-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.value-card { background: rgba(0,26,51,0.5); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 2.5rem; transition: all 0.4s var(--easing); }
+.value-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.value-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--gradient-brand); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: white; }
+.value-card h4 { margin-bottom: 0.6rem; }
+.value-card p { color: var(--color-text-light); font-size: 0.95rem; }
+@media (max-width: 900px) { .values-grid { grid-template-columns: 1fr; } }
+
+.history-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.history-timeline { max-width: 760px; margin: 0 auto; position: relative; padding-left: 60px; }
+.history-timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 25px; width: 2px; background: var(--gradient-brand); opacity: 0.4; }
+.history-step { padding: 1.5rem 0 3rem; position: relative; }
+.history-step:last-child { padding-bottom: 0; }
+.history-step::before {
+  content: ''; position: absolute; left: -45px; top: 1.7rem;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-green-mint);
+  box-shadow: 0 0 14px rgba(28,247,153,0.5);
+}
+.history-year { color: var(--color-green-mint); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.history-step h4 { margin-bottom: 0.5rem; }
+.history-step p { color: var(--color-text-light); }
+
+.team-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.team-card { background: var(--color-bg-dark); border: 1px solid var(--color-border); border-radius: var(--radius-card); overflow: hidden; transition: all 0.4s var(--easing); }
+.team-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.team-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.team-body { padding: 1.5rem 1.8rem 1.8rem; }
+.team-body h4 { margin-bottom: 0.3rem; }
+.team-role { color: var(--color-green-mint); font-size: 0.85rem; margin-bottom: 0.8rem; display: block; }
+.team-body p { color: var(--color-text-light); font-size: 0.92rem; }
+@media (max-width: 900px) { .team-grid { grid-template-columns: 1fr; } }
+
+.cta-final { position: relative; min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 5rem 0; background: var(--color-bg-dark); overflow: hidden; }
+.cta-final-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(28,247,153,0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(43,131,237,0.18) 0%, transparent 50%); }
+.cta-final-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+.cta-final h2 { margin-bottom: 1.5rem; }
+.cta-final p { color: var(--color-text-light); margin-bottom: 2.5rem; font-size: 1.1rem; }
+.cta-final-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body data-page="nosotros">
+
+<div id="nav-mount"></div>
+
+<section class="page-hero">
+  <div class="particles" data-particles="18"></div>
+  <div class="container">
+    <span class="eyebrow reveal">Sobre EcoTouch</span>
+    <h1 class="reveal">Más que proveedores. <span class="gradient-text">Aliados estratégicos</span>.</h1>
+    <p class="reveal">Desde 2019 conectamos universidades, colegios y empresas del Ecuador con tecnología de vanguardia. Conocemos cada institución a la que servimos.</p>
+  </div>
+</section>
+
+<section class="manifest-section">
+  <div class="container">
+    <div class="manifest-grid">
+      <div class="manifest-text">
+        <span class="eyebrow reveal">Nuestro manifiesto</span>
+        <h2 class="reveal">Creemos que la tecnología debe <span class="gradient-text">acompañar a las personas</span>, no reemplazarlas.</h2>
+        <p class="lead reveal">EcoTouch nació para llenar un vacío: las instituciones del Ecuador necesitaban tecnología de primer nivel con respaldo, capacitación y soporte local.</p>
+        <p class="reveal">Importar es fácil. Acompañar a un docente la primera vez que enciende una pantalla interactiva, ese es nuestro oficio. Estamos donde las planillas terminan y la transformación real comienza.</p>
+        <p class="reveal">Por eso no vendemos equipos. Diseñamos soluciones completas: análisis técnico, equipos, instalación, capacitación y soporte continuo. Una conversación, una factura, un aliado.</p>
+      </div>
+      <div class="manifest-image reveal">
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=900&q=80" alt="Equipo EcoTouch trabajando" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Nuestros valores</span>
+      <h2>Cuatro principios que <span class="gradient-text">no negociamos</span></h2>
+    </div>
+
+    <div class="values-grid stagger" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+        </div>
+        <h4>Compromiso</h4>
+        <p>Cumplimos plazos, garantías y promesas. Si decimos 24 horas, son 24 horas.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <h4>Excelencia</h4>
+        <p>Solo trabajamos con marcas líderes a nivel internacional. La calidad es el piso, no el techo.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>Cercanía</h4>
+        <p>Equipo humano local. Te respondemos rápido y te conocemos por nombre, no por número de cliente.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
+        </div>
+        <h4>Sostenibilidad</h4>
+        <p>Cada proyecto incluye prácticas responsables. Por eso lanzamos energía solar: el siguiente paso natural.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="history-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>6 años de <span class="gradient-text">crecimiento sostenido</span></h2>
+    </div>
+
+    <div class="history-timeline stagger">
+      <div class="history-step reveal">
+        <div class="history-year">2019</div>
+        <h4>Nace EcoTouch</h4>
+        <p>Fundamos la empresa con una convicción: las instituciones ecuatorianas merecen tecnología de primer nivel con respaldo local.</p>
+      </div>
+      <div class="history-step reveal">
+        <div class="history-year">2020</div>
+        <h4>Primeras grandes alianzas</h4>
+        <p>Universidades y colegios líderes confían en EcoTouch. Nuestra reputación crece por recomendación, no por publicidad.</p>
+      </div>
+      <div class="history-step reveal">
+        <div class="history-year">2022</div>
+        <h4>Expansión nacional</h4>
+        <p>Abrimos operaciones en Guayaquil. El equipo se duplica para atender instituciones en todo el país con la misma cercanía.</p>
+      </div>
+      <div class="history-step reveal">
+        <div class="history-year">2024</div>
+        <h4>700 pantallas instaladas</h4>
+        <p>Cruzamos el umbral de 700 pantallas en más de 40 instituciones. Cada una con capacitación y soporte incluido.</p>
+      </div>
+      <div class="history-step reveal">
+        <div class="history-year">2025</div>
+        <h4>Lanzamos Energía Solar</h4>
+        <p>Nueva línea de negocio: sistemas fotovoltaicos. El mismo modelo de aliado estratégico, aplicado al futuro energético.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">El equipo</span>
+      <h2>Personas detrás de <span class="gradient-text">cada proyecto</span></h2>
+    </div>
+
+    <div class="team-grid stagger">
+      <div class="team-card reveal">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Director General" class="team-photo" loading="lazy" />
+        <div class="team-body">
+          <h4>Liderazgo Ejecutivo</h4>
+          <span class="team-role">Dirección General</span>
+          <p>Define la estrategia y mantiene la cultura de servicio que define a EcoTouch desde su fundación.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Equipo técnico" class="team-photo" loading="lazy" />
+        <div class="team-body">
+          <h4>Equipo Técnico</h4>
+          <span class="team-role">Instalación y Soporte</span>
+          <p>Técnicos certificados en Quito y Guayaquil. Responden, instalan y capacitan en menos de 24 horas.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="Equipo comercial" class="team-photo" loading="lazy" />
+        <div class="team-body">
+          <h4>Equipo Comercial</h4>
+          <span class="team-role">Asesoría y Cuentas</span>
+          <p>Cada institución tiene un asesor dedicado que conoce su proyecto, no un call center que toma pedidos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-final-bg"></div>
+  <div class="particles" data-particles="14"></div>
+  <div class="cta-final-content">
+    <h2 class="reveal">Hablemos de tu <span class="gradient-text">institución</span></h2>
+    <p class="reveal">Una llamada, un café, una visita técnica. El primer paso siempre es una conversación.</p>
+    <div class="cta-final-buttons reveal">
+      <a href="https://wa.me/593999819542" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp directo</a>
+      <a href="contacto.html" class="btn btn-secondary">Solicitar contacto</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="partials.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

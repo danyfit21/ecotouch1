@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{font-family:"Comfortaa","Segoe UI",system-ui,sans-serif;background:var(--bg);padding:22px;box-sizing:border-box}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .item{display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:var(--radius-md);padding:10px 12px}
+  .dot{width:34px;height:34px;border-radius:9px;flex:none}
+  .k{font-weight:700;font-size:13px;color:var(--fg-strong)}
+  .v{font-size:11px;color:var(--fg-muted);margin-top:1px}
+  .title{font-size:13px;font-weight:700;color:var(--fg-strong);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+</style>
+</head>
+<body>
+  <div class="title">Tokens semánticos</div>
+  <div class="grid">
+    <div class="item"><div class="dot" style="background:#2b83ed"></div><div><div class="k">--accent</div><div class="v">Acción primaria · azul</div></div></div>
+    <div class="item"><div class="dot" style="background:#1cf799"></div><div><div class="k">--accent-2</div><div class="v">Energía · verde</div></div></div>
+    <div class="item"><div class="dot" style="background:#002f56"></div><div><div class="k">--fg</div><div class="v">Texto principal</div></div></div>
+    <div class="item"><div class="dot" style="background:#585e67"></div><div><div class="k">--fg-muted</div><div class="v">Texto secundario</div></div></div>
+    <div class="item"><div class="dot" style="background:#0ea868"></div><div><div class="k">--success</div><div class="v">#0EA868</div></div></div>
+    <div class="item"><div class="dot" style="background:#f0a000"></div><div><div class="k">--warning</div><div class="v">#F0A000</div></div></div>
+    <div class="item"><div class="dot" style="background:#e2452f"></div><div><div class="k">--danger</div><div class="v">#E2452F</div></div></div>
+    <div class="item"><div class="dot" style="background:#e1e2e4"></div><div><div class="k">--border</div><div class="v">Líneas · divisores</div></div></div>
+  </div>
+</body>
+</html>

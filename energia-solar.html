@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Energía Solar — EcoTouch</title>
+<meta name="description" content="Sistemas solares fotovoltaicos para instituciones educativas y empresas. Diseño técnico, instalación y mantenimiento integral en Ecuador." />
+<link rel="icon" type="image/png" href="assets/isotipo-color.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+.solar-hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 6rem; }
+.solar-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(0,26,51,0.85), rgba(0,26,51,0.95)), url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1920&q=80') center/cover no-repeat; }
+.solar-hero-content { position: relative; z-index: 2; max-width: 880px; }
+.solar-hero h1 { margin: 1rem 0 1.5rem; }
+.solar-hero p.lead { font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--color-text-light); margin-bottom: 2.5rem; max-width: 620px; }
+.solar-hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.solar-hero-ctas .btn { padding: 1rem 1.8rem; }
+
+.challenges-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.challenges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.challenge-card { background: rgba(0,26,51,0.5); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 2rem; transition: all 0.3s var(--easing); }
+.challenge-card:hover { border-color: rgba(255, 140, 56, 0.4); transform: translateY(-4px); }
+.challenge-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(255, 140, 56, 0.1); border: 1px solid rgba(255, 140, 56, 0.35); color: #FF8C38; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+.challenge-card h4 { margin-bottom: 0.5rem; }
+.challenge-card p { color: var(--color-text-light); font-size: 0.95rem; }
+@media (max-width: 900px) { .challenges-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .challenges-grid { grid-template-columns: 1fr; } }
+
+.method-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 60px; }
+.timeline::before { content: ''; position: absolute; top: 20px; bottom: 20px; left: 25px; width: 2px; background: var(--gradient-brand); opacity: 0.4; }
+.timeline-step { position: relative; padding: 1.4rem 0 3rem; }
+.timeline-step:last-child { padding-bottom: 0; }
+.timeline-step::before {
+  content: ''; position: absolute; left: -45px; top: 1.6rem;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-green-mint);
+  box-shadow: 0 0 14px rgba(28,247,153,0.5);
+}
+.timeline-num { color: var(--color-green-mint); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.timeline-step h4 { margin-bottom: 0.5rem; }
+.timeline-step p { color: var(--color-text-light); max-width: 600px; }
+
+.benefits-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.benefit-card { background: rgba(0,26,51,0.4); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 2.5rem; transition: all 0.4s var(--easing); }
+.benefit-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.benefit-icon { width: 56px; height: 56px; border-radius: 16px; background: rgba(28,247,153,0.08); border: 1px solid var(--color-border-green); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--color-green-mint); }
+.benefit-card h4 { margin-bottom: 0.6rem; font-size: 1.2rem; }
+.benefit-card p { color: var(--color-text-light); }
+@media (max-width: 768px) { .benefits-grid { grid-template-columns: 1fr; } }
+
+.calc-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; position: relative; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.calc-image { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px -20px rgba(43,131,237,0.55); }
+.calc-image img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.calc-data { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+.calc-item { padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 18px; background: rgba(0,47,86,0.3); }
+.calc-num { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--color-green-mint); font-weight: 700; line-height: 1; }
+.calc-lbl { font-size: 0.85rem; color: var(--color-text-light); margin-top: 0.5rem; }
+@media (max-width: 900px) { .calc-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+.cta-final { position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 5rem 0; background: var(--color-bg-dark); overflow: hidden; }
+.cta-final-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(28,247,153,0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(43,131,237,0.18) 0%, transparent 50%); }
+.cta-final-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+.cta-final h2 { margin-bottom: 1.5rem; }
+.cta-final p { color: var(--color-text-light); margin-bottom: 2.5rem; font-size: 1.1rem; }
+.cta-final-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body data-page="energia-solar">
+
+<div id="nav-mount"></div>
+
+<section class="solar-hero">
+  <div class="solar-hero-bg" data-parallax="0.2"></div>
+  <div class="particles" data-particles="18"></div>
+
+  <div class="container solar-hero-content">
+    <span class="eyebrow reveal">Nueva línea · 2025</span>
+    <h1 class="reveal">Energía <span class="gradient-text">Solar</span> para instituciones que lideran.</h1>
+    <p class="lead reveal">Diseñamos, instalamos y damos mantenimiento a sistemas fotovoltaicos completos. Reduce tu factura eléctrica y demuestra tu compromiso con la sostenibilidad.</p>
+    <div class="solar-hero-ctas reveal">
+      <a href="contacto.html" class="btn btn-primary">Calcular ahorro</a>
+      <a href="#metodologia" class="btn btn-secondary">Ver metodología</a>
+    </div>
+  </div>
+</section>
+
+<section class="challenges-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Los retos energéticos del país</span>
+      <h2>¿Por qué <span class="gradient-text">energía solar</span> ahora?</h2>
+      <p>El Ecuador atraviesa una transformación energética. Las instituciones que actúan hoy ganan ventaja competitiva mañana.</p>
+    </div>
+
+    <div class="challenges-grid stagger">
+      <div class="challenge-card reveal">
+        <div class="challenge-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h4>Apagones recurrentes</h4>
+        <p>Tu institución necesita continuidad. La energía solar con respaldo garantiza operación incluso durante racionamientos.</p>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="challenge-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h4>Tarifas eléctricas crecientes</h4>
+        <p>El costo de la electricidad sube cada año. Un sistema solar te protege de la inflación tarifaria por 25+ años.</p>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="challenge-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Compromiso ESG</h4>
+        <p>Familias, alumnos y empresas valoran instituciones sostenibles. El liderazgo ambiental se vuelve diferenciador clave.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="method-section" id="metodologia">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Nuestra metodología</span>
+      <h2>Un proceso <span class="gradient-text">probado</span> de principio a fin</h2>
+    </div>
+
+    <div class="timeline stagger">
+      <div class="timeline-step reveal">
+        <span class="timeline-num">Paso 01</span>
+        <h4>Auditoría energética</h4>
+        <p>Analizamos tus planillas de los últimos 12 meses, recorremos tus instalaciones y medimos consumo, radiación solar y espacio disponible.</p>
+      </div>
+      <div class="timeline-step reveal">
+        <span class="timeline-num">Paso 02</span>
+        <h4>Diseño técnico personalizado</h4>
+        <p>Calculamos potencia, cantidad de paneles, tipo de instalación y simulamos producción mes a mes para tu ubicación específica.</p>
+      </div>
+      <div class="timeline-step reveal">
+        <span class="timeline-num">Paso 03</span>
+        <h4>Propuesta financiera clara</h4>
+        <p>Te entregamos un análisis de retorno de inversión: cuánto ahorras, en cuántos años se paga, qué pasa después.</p>
+      </div>
+      <div class="timeline-step reveal">
+        <span class="timeline-num">Paso 04</span>
+        <h4>Instalación profesional</h4>
+        <p>Equipo certificado instala paneles, inversor, baterías (opcional) y conecta a tu red. Permisos y trámites incluidos.</p>
+      </div>
+      <div class="timeline-step reveal">
+        <span class="timeline-num">Paso 05</span>
+        <h4>Monitoreo y mantenimiento</h4>
+        <p>Monitoreo remoto 24/7 vía app. Mantenimientos preventivos anuales incluidos. Tu inversión, protegida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Beneficios reales</span>
+      <h2>Más que ahorro: <span class="gradient-text">reputación y resiliencia</span></h2>
+    </div>
+
+    <div class="benefits-grid stagger">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h4>Ahorro de hasta 70%</h4>
+        <p>Reduce drásticamente tu factura eléctrica desde el primer mes. Cobertura típica del 40% al 100% del consumo diurno.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+        </div>
+        <h4>Retorno en 4–7 años</h4>
+        <p>El sistema se paga solo. Después, son 18+ años de energía gratuita. Cobertura de garantía hasta 25 años en paneles.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <h4>Reputación institucional</h4>
+        <p>Diferenciate como institución sostenible. Genera contenido para marketing, branding y reportes ESG.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Resiliencia ante apagones</h4>
+        <p>Sistemas con baterías mantienen operativos servidores, iluminación y aulas durante cortes de energía nacional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-section">
+  <div class="container">
+    <div class="calc-grid">
+      <div>
+        <span class="eyebrow reveal">¿Cuánto puedes ahorrar?</span>
+        <h2 class="reveal">Un ejemplo real: <span class="gradient-text">institución educativa</span></h2>
+        <p class="reveal" style="color: var(--color-text-light); margin-top: 1rem;">Un colegio con planilla mensual de $3,000 USD puede esperar resultados aproximados como estos al instalar un sistema solar dimensionado:</p>
+
+        <div class="calc-data stagger">
+          <div class="calc-item reveal">
+            <span class="calc-num"><span data-counter="70" data-suffix="%">0</span></span>
+            <span class="calc-lbl">de reducción en planilla</span>
+          </div>
+          <div class="calc-item reveal">
+            <span class="calc-num">$<span data-counter="2100" data-suffix="">0</span></span>
+            <span class="calc-lbl">de ahorro mensual aprox.</span>
+          </div>
+          <div class="calc-item reveal">
+            <span class="calc-num"><span data-counter="5" data-suffix=" años">0</span></span>
+            <span class="calc-lbl">de retorno de inversión</span>
+          </div>
+          <div class="calc-item reveal">
+            <span class="calc-num"><span data-counter="25" data-suffix=" años">0</span></span>
+            <span class="calc-lbl">de garantía en paneles</span>
+          </div>
+        </div>
+
+        <a href="contacto.html" class="btn btn-primary reveal">Calcular para mi institución</a>
+      </div>
+      <div class="calc-image reveal">
+        <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1200&q=80" alt="Paneles solares en techo institucional" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-final-bg"></div>
+  <div class="particles" data-particles="14"></div>
+  <div class="cta-final-content">
+    <span class="eyebrow reveal">El siguiente paso</span>
+    <h2 class="reveal">¿Listos para ahorrar y <span class="gradient-text">liderar con energía solar</span>?</h2>
+    <p class="reveal">Te enviamos una auditoría preliminar y proyección de ahorro gratis, sin compromiso, en menos de 5 días hábiles.</p>
+    <div class="cta-final-buttons reveal">
+      <a href="https://wa.me/593999819542" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp directo</a>
+      <a href="contacto.html" class="btn btn-secondary">Solicitar auditoría gratuita</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="partials.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

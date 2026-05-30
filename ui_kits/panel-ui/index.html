@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecotouch — Pantalla interactiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #060d16; overflow: hidden; }
+  body { font-family: var(--font-brand); }
+  * { box-sizing: border-box; }
+  #stageWrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+  #stage {
+    width: 1280px; height: 720px; position: relative; overflow: hidden;
+    background: #0a2540; border-radius: 6px;
+    transform-origin: center center;
+  }
+  [data-lucide] svg { width: 1em; height: 1em; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div id="stageWrap"><div id="stage"><div id="root"></div></div></div>
+<script>
+  function fitStage() {
+    const s = document.getElementById("stage");
+    const k = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    s.style.transform = "scale(" + k + ")";
+  }
+  window.addEventListener("resize", fitStage);
+  window.addEventListener("load", fitStage);
+  fitStage();
+</script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="Whiteboard.jsx"></script>
+<script type="text/babel">
+  const { useState } = React;
+
+  function Launcher() {
+    usePanelLucide();
+    const [view, setView] = useState("home");
+
+    const apps = [
+      { icon: "pen-tool", label: "Pizarra", accent: "linear-gradient(135deg,#1cf799,#2b83ed)", go: () => setView("board") },
+      { icon: "folder-open", label: "Documentos", accent: "linear-gradient(135deg,#2b83ed,#1858b0)" },
+      { icon: "chrome", label: "Navegador", accent: "linear-gradient(135deg,#0ea868,#12d07e)" },
+      { icon: "cast", label: "Mirroring", accent: "linear-gradient(135deg,#6ba6f2,#2b83ed)" },
+      { icon: "presentation", label: "Presentar", accent: "linear-gradient(135deg,#1cf799,#0ea868)" },
+      { icon: "layout-grid", label: "Más apps", accent: "linear-gradient(135deg,#3c424b,#1f2a36)" },
+    ];
+
+    if (view === "board") return <Whiteboard onHome={() => setView("home")} />;
+
+    return (
+      <div style={{ position: "absolute", inset: 0 }}>
+        {/* wallpaper */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#04203b 0%,#0a2f56 45%,#0e8f63 130%)" }}></div>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(800px 460px at 78% 8%, rgba(28,247,153,0.22), transparent 60%), radial-gradient(700px 420px at 12% 100%, rgba(43,131,237,0.28), transparent 60%)" }}></div>
+        {/* faint isotype watermark */}
+        <img src="../../assets/isotipo-mono-2.png" alt="" style={{ position: "absolute", right: -60, bottom: -70, width: 380, opacity: 0.08 }} />
+
+        <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column" }}>
+          <StatusBar />
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 46, paddingBottom: 40 }}>
+            <Clock />
+            <div style={{ display: "flex", gap: 18 }}>
+              {apps.map((a) => (
+                <AppTile key={a.label} icon={a.icon} label={a.label} accent={a.accent} onClick={a.go} />
+              ))}
+            </div>
+          </div>
+          <Dock onHome={() => setView("home")} />
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<Launcher />);
+</script>
+</body>
+</html>

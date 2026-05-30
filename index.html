@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EcoTouch — Tecnología de vanguardia para instituciones del Ecuador</title>
+<meta name="description" content="Pantallas interactivas y energía solar para instituciones educativas y empresas. 700+ pantallas instaladas en 40+ instituciones del Ecuador." />
+<link rel="icon" type="image/png" href="assets/isotipo-color.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ====== INDEX PAGE-SPECIFIC ====== */
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+  padding-top: 6rem;
+  background: var(--gradient-hero);
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1920&q=80');
+  background-size: cover; background-position: center;
+  filter: saturate(1.1);
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(28,247,153,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(43,131,237,0.18) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(0,26,51,0.85) 0%, rgba(0,26,51,0.95) 100%);
+}
+.hero-content { position: relative; z-index: 2; width: 100%; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+.hero-text { max-width: 880px; }
+.hero h1 {
+  margin: 0.8rem 0 1.4rem;
+  font-weight: 700;
+}
+.hero h1 .accent { display: inline-block; }
+.hero-lead {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color: var(--color-text-light); max-width: 600px; margin-bottom: 2.5rem;
+  line-height: 1.55;
+}
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.hero-ctas .btn { padding: 1rem 1.8rem; font-size: 0.98rem; }
+
+.hero-stats {
+  position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+  width: calc(100% - 3rem); max-width: 1100px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; z-index: 3;
+  background: rgba(0, 26, 51, 0.55);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 1.4rem 2rem;
+}
+.hero-stat { text-align: center; position: relative; }
+.hero-stat + .hero-stat::before {
+  content: ''; position: absolute; left: 0; top: 15%; height: 70%; width: 1px;
+  background: var(--color-border);
+}
+.hero-stat .num { display: block; font-weight: 700; font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: var(--color-green-mint); line-height: 1; }
+.hero-stat .lbl { font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.4rem; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; }
+
+.scroll-hint {
+  position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; color: var(--color-text-muted); letter-spacing: 0.25em;
+  text-transform: uppercase; text-align: center; z-index: 3;
+  display: none;
+}
+@media (min-width: 1280px) { .scroll-hint { display: block; } }
+.scroll-hint .line { width: 1px; height: 32px; background: linear-gradient(180deg, transparent, var(--color-green-mint)); margin: 0.5rem auto 0; animation: scrollDown 2.2s infinite; }
+@keyframes scrollDown {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* STATS BAR */
+.stats-bar { background: var(--color-bg-mid); padding: 4rem 0; border-block: 1px solid var(--color-border); }
+.stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.stats-row .stat { text-align: center; padding: 1rem; position: relative; }
+.stats-row .stat + .stat::before {
+  content: ''; position: absolute; left: 0; top: 20%; height: 60%; width: 1px;
+  background: var(--gradient-brand); opacity: 0.3;
+}
+.stats-row .num { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: var(--color-green-mint); line-height: 1; display: block; }
+.stats-row .lbl { color: var(--color-text-light); font-size: 0.9rem; margin-top: 0.7rem; font-weight: 300; }
+
+@media (max-width: 768px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .stats-row .stat + .stat::before { display: none; }
+}
+
+/* DOS LINEAS */
+.lines-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.lines-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.line-card {
+  position: relative; aspect-ratio: 4/5; min-height: 480px;
+  border-radius: var(--radius-card); overflow: hidden;
+  cursor: pointer;
+}
+.line-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.7s var(--easing);
+}
+.line-card:hover .line-card-bg { transform: scale(1.06); }
+.line-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,26,51,0.3) 0%, rgba(0,26,51,0.85) 70%, rgba(0,26,51,0.95) 100%);
+  transition: background 0.4s;
+}
+.line-card:hover .line-card-overlay { background: linear-gradient(180deg, rgba(0,26,51,0.2) 0%, rgba(0,26,51,0.85) 70%, rgba(0,26,51,0.95) 100%); }
+.line-card-content {
+  position: absolute; inset: 0;
+  padding: 2.5rem; z-index: 2;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.line-card h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin: 0.8rem 0; }
+.line-card p { color: var(--color-text-light); margin-bottom: 1.5rem; max-width: 90%; }
+.line-card-cta { color: var(--color-green-mint); font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+.line-card-cta::after { content: '→'; transition: transform 0.3s; }
+.line-card:hover .line-card-cta::after { transform: translateX(6px); }
+
+@media (max-width: 768px) {
+  .lines-grid { grid-template-columns: 1fr; }
+  .line-card { min-height: 420px; aspect-ratio: 4/4.5; }
+}
+
+/* WHY ECOTOUCH */
+.why-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.why-card {
+  background: rgba(0,26,51,0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 2rem;
+  transition: all 0.4s var(--easing);
+  position: relative; overflow: hidden;
+}
+.why-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+  background: var(--gradient-brand);
+  opacity: 0; transition: opacity 0.4s;
+}
+.why-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.why-card:hover::before { opacity: 1; }
+.why-num {
+  font-family: var(--font-brand); font-weight: 700; font-size: 2.5rem;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  display: block; line-height: 1; margin-bottom: 1rem;
+}
+.why-card h4 { margin-bottom: 0.8rem; font-size: 1.15rem; }
+.why-card p { color: var(--color-text-light); font-size: 0.95rem; line-height: 1.55; }
+
+@media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+
+/* CLIENT MARQUEE */
+.clients-section { background: var(--color-bg-dark); padding: 5rem 0; overflow: hidden; }
+.clients-header { text-align: center; margin-bottom: 3rem; }
+.clients-header h3 { font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.marquee-wrap { overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
+.marquee { display: flex; gap: 4rem; width: max-content; animation: marquee 35s linear infinite; }
+.marquee-item {
+  font-family: var(--font-brand); font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: rgba(225,226,228,0.35);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.marquee-item:hover { color: white; }
+
+/* SOLAR PROMO */
+.solar-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; position: relative; }
+.solar-section::before {
+  content: ''; position: absolute; left: 0; top: 10%; width: 3px; height: 80%;
+  background: var(--gradient-brand); border-radius: 0 3px 3px 0;
+}
+.solar-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: center; }
+.solar-text h2 { margin: 1rem 0 1.5rem; }
+.solar-text p { color: var(--color-text-light); margin-bottom: 2rem; }
+.solar-list { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.solar-list li { display: flex; gap: 0.8rem; align-items: flex-start; }
+.solar-list .check {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(28,247,153,0.15); border: 1px solid var(--color-green-mint);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-green-mint); font-size: 0.7rem; font-weight: 700;
+  margin-top: 2px;
+}
+.solar-image {
+  position: relative; border-radius: 24px; overflow: hidden;
+  box-shadow: 0 20px 60px -20px rgba(43,131,237,0.55), 0 0 100px -30px rgba(28,247,153,0.2);
+}
+.solar-image img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
+@media (max-width: 900px) { .solar-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* PROJECTS PREVIEW */
+.projects-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.project-card {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0;
+  border-radius: var(--radius-card); overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.4s, transform 0.4s var(--easing);
+}
+.project-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.project-card:nth-child(even) { grid-template-columns: 1.1fr 0.9fr; }
+.project-card:nth-child(even) .project-image-wrap { order: 2; }
+.project-image-wrap { position: relative; min-height: 320px; overflow: hidden; }
+.project-image-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--easing); }
+.project-card:hover .project-image-wrap img { transform: scale(1.05); }
+.project-info { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+.project-cat { color: var(--color-green-mint); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 0.8rem; }
+.project-info h3 { margin-bottom: 0.8rem; }
+.project-info p { color: var(--color-text-light); margin-bottom: 1.4rem; }
+.project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tag { padding: 0.25rem 0.7rem; border-radius: 100px; background: rgba(43,131,237,0.1); border: 1px solid var(--color-border); font-size: 0.78rem; color: var(--color-text-light); }
+
+@media (max-width: 768px) {
+  .project-card, .project-card:nth-child(even) { grid-template-columns: 1fr; }
+  .project-card:nth-child(even) .project-image-wrap { order: 0; }
+}
+
+/* CTA FINAL */
+.cta-final {
+  position: relative; min-height: 60vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 5rem 0;
+  background: var(--color-bg-dark);
+  overflow: hidden;
+}
+.cta-final-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: 
+    radial-gradient(ellipse at 30% 50%, rgba(28,247,153,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(43,131,237,0.18) 0%, transparent 50%);
+}
+.cta-final-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+.cta-final h2 { margin-bottom: 1.5rem; }
+.cta-final p { color: var(--color-text-light); margin-bottom: 2.5rem; font-size: 1.1rem; }
+.cta-final-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-final-buttons .btn { padding: 1rem 1.8rem; }
+.cta-final-buttons .btn-whatsapp { background: #25D366; border-color: #25D366; color: white; }
+.cta-final-buttons .btn-whatsapp:hover { background: #1FB957; }
+</style>
+</head>
+<body data-page="index">
+
+<div id="nav-mount"></div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-bg" data-parallax="0.25"></div>
+  <div class="hero-overlay"></div>
+  <div class="particles" data-particles="22"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
+      <span class="eyebrow reveal">Ecuador · Desde 2019</span>
+      <h1 class="reveal">Tecnología de <span class="gradient-text">vanguardia</span> para instituciones que lideran el futuro.</h1>
+      <p class="hero-lead reveal">Conectamos universidades, colegios y empresas con pantallas interactivas y energía solar fotovoltaica. No somos un proveedor: somos tu aliado estratégico.</p>
+      <div class="hero-ctas reveal">
+        <a href="contacto.html" class="btn btn-primary">Hablar con un asesor</a>
+        <a href="pantallas.html" class="btn btn-secondary">Ver soluciones</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num" data-counter="700" data-suffix="+">0</span>
+      <span class="lbl">Pantallas instaladas</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num" data-counter="40" data-suffix="+">0</span>
+      <span class="lbl">Instituciones aliadas</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num" data-counter="100" data-suffix="k+">0</span>
+      <span class="lbl">Alumnos impactados</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    Scroll
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ====== STATS BAR ====== -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-row stagger">
+      <div class="stat reveal"><span class="num" data-counter="700" data-suffix="+">0</span><span class="lbl">Pantallas</span></div>
+      <div class="stat reveal"><span class="num" data-counter="40" data-suffix="+">0</span><span class="lbl">Instituciones</span></div>
+      <div class="stat reveal"><span class="num" data-counter="100" data-suffix="k+">0</span><span class="lbl">Alumnos</span></div>
+      <div class="stat reveal"><span class="num" data-counter="6" data-suffix=" años">0</span><span class="lbl">Trayectoria</span></div>
+      <div class="stat reveal"><span class="num" data-counter="5" data-suffix=" años">0</span><span class="lbl">Garantía</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DOS LÍNEAS ====== -->
+<section class="lines-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Dos líneas de transformación</span>
+      <h2>Una empresa. <span class="gradient-text">Dos soluciones</span> que cambian instituciones.</h2>
+    </div>
+
+    <div class="lines-grid">
+      <a href="pantallas.html" class="line-card reveal">
+        <div class="line-card-bg" style="background-image: url('https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=1200&q=80')"></div>
+        <div class="line-card-overlay"></div>
+        <div class="line-card-content">
+          <span class="eyebrow blue">Solución principal</span>
+          <h3>Pantallas Interactivas</h3>
+          <p>Hardware premium, software intuitivo, capacitación incluida y soporte en 24 horas. Listo para transformar aulas, salas y auditorios.</p>
+          <span class="line-card-cta">Conocer pantallas</span>
+        </div>
+      </a>
+
+      <a href="energia-solar.html" class="line-card reveal">
+        <div class="line-card-bg" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80')"></div>
+        <div class="line-card-overlay"></div>
+        <div class="line-card-content">
+          <span class="eyebrow">Nueva línea · 2025</span>
+          <h3>Energía Solar</h3>
+          <p>Diseño, instalación y mantenimiento de sistemas fotovoltaicos para reducir tu factura eléctrica y elevar tu compromiso con la sostenibilidad.</p>
+          <span class="line-card-cta">Explorar energía solar</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== POR QUÉ ECOTOUCH ====== -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">¿Por qué EcoTouch?</span>
+      <h2>No somos solo proveedores. Somos <span class="gradient-text">aliados estratégicos</span>.</h2>
+      <p>Seis razones que explican por qué 40+ instituciones del Ecuador eligieron trabajar con nosotros, año tras año.</p>
+    </div>
+
+    <div class="why-grid stagger">
+      <div class="why-card reveal">
+        <span class="why-num">01</span>
+        <h4>Experiencia real en Ecuador</h4>
+        <p>6 años instalando, capacitando y dando soporte a instituciones ecuatorianas. Conocemos los retos del país.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-num">02</span>
+        <h4>Instituciones reconocidas confían</h4>
+        <p>USFQ, ECOTEC, Thomas More, Spellman y muchas más eligieron EcoTouch como aliado tecnológico.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-num">03</span>
+        <h4>Solución integral completa</h4>
+        <p>Análisis, equipos, instalación, capacitación y soporte. Una sola conversación, una sola factura.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-num">04</span>
+        <h4>Tecnología de vanguardia</h4>
+        <p>Marcas líderes a nivel internacional con representación local en Ecuador. Lo último, sin esperas.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-num">05</span>
+        <h4>Soporte en menos de 24h</h4>
+        <p>Equipo técnico local en Quito y Guayaquil. Atención presencial, remota y reposición de equipos.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-num">06</span>
+        <h4>Garantía y respaldo local</h4>
+        <p>5 años de garantía sobre el hardware, capacitación incluida y acompañamiento continuo del equipo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CLIENTES MARQUEE ====== -->
+<section class="clients-section">
+  <div class="container">
+    <div class="clients-header reveal">
+      <h3>Más de 40 instituciones ya avanzaron con EcoTouch</h3>
+    </div>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span class="marquee-item">USFQ</span>
+      <span class="marquee-item">· ECOTEC</span>
+      <span class="marquee-item">· Thomas More</span>
+      <span class="marquee-item">· Spellman</span>
+      <span class="marquee-item">· UDLA</span>
+      <span class="marquee-item">· Liceo Internacional</span>
+      <span class="marquee-item">· Alemán Humboldt</span>
+      <span class="marquee-item">· PUCE</span>
+      <span class="marquee-item">· UEES</span>
+      <span class="marquee-item">· UTPL</span>
+      <span class="marquee-item">· Cotopaxi Academy</span>
+      <!-- duplicated -->
+      <span class="marquee-item">USFQ</span>
+      <span class="marquee-item">· ECOTEC</span>
+      <span class="marquee-item">· Thomas More</span>
+      <span class="marquee-item">· Spellman</span>
+      <span class="marquee-item">· UDLA</span>
+      <span class="marquee-item">· Liceo Internacional</span>
+      <span class="marquee-item">· Alemán Humboldt</span>
+      <span class="marquee-item">· PUCE</span>
+      <span class="marquee-item">· UEES</span>
+      <span class="marquee-item">· UTPL</span>
+      <span class="marquee-item">· Cotopaxi Academy</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SOLAR PROMO ====== -->
+<section class="solar-section">
+  <div class="container">
+    <div class="solar-grid">
+      <div class="solar-text">
+        <span class="eyebrow reveal">Nueva línea · 2025</span>
+        <h2 class="reveal">Ahora también <span class="gradient-text">Energía Solar</span></h2>
+        <p class="reveal">Llevamos la misma filosofía de aliado estratégico a un nuevo terreno: sistemas fotovoltaicos a la medida para instituciones que quieren ahorrar y liderar con sostenibilidad.</p>
+        <ul class="solar-list stagger">
+          <li class="reveal"><span class="check">✓</span><span>Auditoría energética + diseño técnico personalizado para tu institución.</span></li>
+          <li class="reveal"><span class="check">✓</span><span>Reducción de hasta 70% en tu factura eléctrica desde el primer mes.</span></li>
+          <li class="reveal"><span class="check">✓</span><span>Paneles monocristalinos con +25 años de durabilidad garantizada.</span></li>
+          <li class="reveal"><span class="check">✓</span><span>Instalación, monitoreo remoto y mantenimiento incluido.</span></li>
+        </ul>
+        <a href="energia-solar.html" class="btn btn-primary reveal">Explorar energía solar</a>
+      </div>
+      <div class="solar-image reveal">
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80" alt="Sistema solar fotovoltaico" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROYECTOS PREVIEW ====== -->
+<section class="projects-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Casos de éxito</span>
+      <h2>Proyectos que <span class="gradient-text">transformaron</span> instituciones</h2>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-image-wrap">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=80" alt="USFQ" loading="lazy" />
+      </div>
+      <div class="project-info">
+        <span class="project-cat">Universidad · 2024</span>
+        <h3>USFQ — Pantallas para 40+ aulas</h3>
+        <p>Implementamos pantallas interactivas Prowise de 75″ en aulas estratégicas de la USFQ, junto con capacitación docente certificada y soporte técnico continuo.</p>
+        <div class="project-tags">
+          <span class="tag">Pantallas 75″</span>
+          <span class="tag">Capacitación</span>
+          <span class="tag">Soporte 24/7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-image-wrap">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80" alt="ECOTEC" loading="lazy" />
+      </div>
+      <div class="project-info">
+        <span class="project-cat">Universidad · 2023</span>
+        <h3>Universidad ECOTEC — Aulas inteligentes</h3>
+        <p>Renovación tecnológica completa: pantallas interactivas, soluciones de videoconferencia y sistemas de captura para clases híbridas en sede Guayaquil.</p>
+        <div class="project-tags">
+          <span class="tag">Aulas híbridas</span>
+          <span class="tag">Videoconferencia</span>
+          <span class="tag">Capacitación</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-image-wrap">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80" alt="Thomas More" loading="lazy" />
+      </div>
+      <div class="project-info">
+        <span class="project-cat">Colegio bilingüe · 2024</span>
+        <h3>Colegio Thomas More — Transformación digital</h3>
+        <p>Equipamiento integral del campus con pantallas interactivas en cada aula y un plan de capacitación docente continuo, sobre múltiples fases.</p>
+        <div class="project-tags">
+          <span class="tag">Educación K-12</span>
+          <span class="tag">Multi-fase</span>
+          <span class="tag">Soporte local</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;" class="reveal">
+      <a href="proyectos.html" class="btn btn-secondary">Ver todos los proyectos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<section class="cta-final">
+  <div class="cta-final-bg"></div>
+  <div class="particles" data-particles="15"></div>
+  <div class="cta-final-content">
+    <span class="eyebrow reveal">El siguiente paso</span>
+    <h2 class="reveal">¿Tu institución está lista para el <span class="gradient-text">siguiente salto tecnológico</span>?</h2>
+    <p class="reveal">Conversemos. Te entregamos un diagnóstico y una propuesta personalizada en menos de 5 días hábiles, sin compromiso.</p>
+    <div class="cta-final-buttons reveal">
+      <a href="https://wa.me/593999819542" target="_blank" rel="noopener" class="btn btn-whatsapp">WhatsApp directo</a>
+      <a href="tel:+593999819542" class="btn btn-secondary">Llamar ahora</a>
+      <a href="contacto.html" class="btn btn-primary">Solicitar propuesta</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="partials.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

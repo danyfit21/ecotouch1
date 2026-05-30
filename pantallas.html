@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pantallas Interactivas — EcoTouch</title>
+<meta name="description" content="Pantallas interactivas premium con instalación, capacitación y soporte 24h. La solución completa para aulas, salas de reunión y auditorios." />
+<link rel="icon" type="image/png" href="assets/isotipo-color.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ============ HERO (CINEMATIC SCROLL STAGE) ============ */
+
+.cinematic-stage {
+  position: relative;
+  height: 500vh; /* 5 sections × 100vh */
+  background: var(--gradient-hero);
+}
+
+.cinematic-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.cinematic-pin .particles { position: absolute; inset: 0; z-index: 1; }
+.cinematic-pin .ambient {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(28,247,153,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(43,131,237,0.18) 0%, transparent 60%);
+}
+
+.cinematic-product {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(320px, 70vw, 900px);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  z-index: 2;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55));
+}
+.cinematic-product img {
+  width: 100%; height: auto; display: block;
+}
+
+/* Overlay text scenes — each pinned within stage */
+.scene {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.scene.active { opacity: 1; pointer-events: auto; }
+
+.scene-inner { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 2.5rem); }
+
+.scene-1 .scene-inner { text-align: center; }
+.scene-1 h1 { font-size: clamp(2.5rem, 7vw, 6rem); margin-bottom: 1rem; }
+.scene-1 .sub { font-size: clamp(1rem, 1.5vw, 1.3rem); color: var(--color-text-light); max-width: 600px; margin: 0 auto; }
+.scene-1 .badge {
+  display: inline-block; padding: 0.4rem 1rem;
+  border: 1px solid var(--color-border-green); background: rgba(28,247,153,0.06);
+  border-radius: 100px; color: var(--color-green-mint);
+  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.scene-side { padding: 0 5%; }
+.scene-side .caption {
+  max-width: 380px;
+  background: rgba(0, 26, 51, 0.7);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 2rem;
+}
+.scene-side .caption span.label {
+  display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--color-green-mint); margin-bottom: 0.8rem;
+}
+.scene-side .caption h2 { font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin-bottom: 0.8rem; line-height: 1.15; }
+.scene-side .caption p { color: var(--color-text-light); font-size: 0.98rem; }
+.scene-side.right { justify-content: flex-end; }
+.scene-side.right .scene-inner { display: flex; justify-content: flex-end; }
+.scene-side.left .scene-inner { display: flex; justify-content: flex-start; }
+
+.scene-5 .scene-inner { text-align: center; }
+.scene-5 h2 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1.2rem; }
+.scene-5 p { color: var(--color-text-light); margin-bottom: 2rem; font-size: 1.1rem; }
+.scene-5 .btn { padding: 1rem 1.8rem; }
+
+/* Section progress indicator */
+.scene-progress {
+  position: absolute;
+  right: clamp(1rem, 3vw, 3rem);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 0.8rem;
+  z-index: 10;
+}
+.scene-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(225,226,228,0.25);
+  transition: all 0.4s var(--easing);
+  position: relative;
+}
+.scene-dot.active { background: var(--color-green-mint); transform: scale(1.3); box-shadow: 0 0 15px var(--color-green-mint); }
+.scene-dot::before {
+  content: attr(data-label);
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  font-size: 0.7rem; color: var(--color-text-muted); letter-spacing: 0.1em; text-transform: uppercase;
+  white-space: nowrap; opacity: 0;
+  transition: opacity 0.3s;
+}
+.scene-dot.active::before { opacity: 1; }
+
+@media (max-width: 768px) {
+  .scene-progress { display: none; }
+  .scene-side .caption { max-width: 100%; }
+  .scene-side { padding: 0 1rem; align-items: flex-end; padding-bottom: 4rem; }
+  .scene-side.right .scene-inner, .scene-side.left .scene-inner { justify-content: center; }
+}
+
+/* ============ BENEFITS GRID ============ */
+.benefits-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.benefit-card {
+  background: rgba(0,26,51,0.4); backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border); border-radius: var(--radius-card);
+  padding: 2.5rem;
+  transition: all 0.4s var(--easing);
+}
+.benefit-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.benefit-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: rgba(28,247,153,0.08);
+  border: 1px solid var(--color-border-green);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-green-mint);
+}
+.benefit-card h4 { margin-bottom: 0.6rem; font-size: 1.2rem; }
+.benefit-card p { color: var(--color-text-light); }
+
+@media (max-width: 768px) { .benefits-grid { grid-template-columns: 1fr; } }
+
+/* ============ COMPLETE SOLUTION ============ */
+.solution-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.solution-card {
+  padding: 2rem; border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-mid);
+  transition: all 0.4s var(--easing); position: relative; overflow: hidden;
+}
+.solution-card:hover { border-color: var(--color-border-green); }
+.solution-num { color: var(--color-blue-mid); font-weight: 700; font-size: 1rem; letter-spacing: 0.05em; margin-bottom: 1rem; display: block; }
+.solution-card h4 { margin-bottom: 0.6rem; }
+.solution-card p { color: var(--color-text-light); font-size: 0.95rem; }
+@media (max-width: 900px) { .solution-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .solution-grid { grid-template-columns: 1fr; } }
+
+/* ============ TRUST STATS ============ */
+.trust-bar { background: var(--color-bg-mid); padding: 4rem 0; }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; text-align: center; }
+.trust-item { padding: 0 1rem; position: relative; }
+.trust-item + .trust-item::before {
+  content: ''; position: absolute; left: 0; top: 15%; height: 70%; width: 1px;
+  background: var(--gradient-brand); opacity: 0.3;
+}
+.trust-num { font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); color: var(--color-green-mint); display: block; line-height: 1; }
+.trust-lbl { color: var(--color-text-light); margin-top: 0.6rem; font-size: 0.95rem; }
+@media (max-width: 768px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } .trust-item + .trust-item::before { display: none; } }
+
+/* ============ APPLICATIONS ============ */
+.apps-section { background: var(--color-bg-dark); padding: clamp(4rem, 9vw, 8rem) 0; }
+.apps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.app-card {
+  position: relative; aspect-ratio: 3/4; overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-bg-mid);
+  transition: transform 0.5s var(--easing);
+}
+.app-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--easing); }
+.app-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,26,51,0.95) 100%);
+}
+.app-card:hover { transform: translateY(-6px); }
+.app-card:hover img { transform: scale(1.08); }
+.app-card-content { position: absolute; bottom: 0; left: 0; padding: 1.5rem; z-index: 2; }
+.app-card h4 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+.app-card span { color: var(--color-green-mint); font-size: 0.85rem; }
+@media (max-width: 900px) { .apps-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ============ CASES MINI ============ */
+.cases-section { background: var(--color-bg-mid); padding: clamp(4rem, 9vw, 8rem) 0; }
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.case-card {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: all 0.4s var(--easing);
+}
+.case-card:hover { border-color: var(--color-border-green); transform: translateY(-4px); }
+.case-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.case-card-body { padding: 1.5rem 1.8rem 1.8rem; }
+.case-card-body span.cat { color: var(--color-green-mint); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.case-card-body h4 { margin: 0.6rem 0 0.6rem; }
+.case-card-body p { color: var(--color-text-light); font-size: 0.92rem; }
+@media (max-width: 900px) { .cases-grid { grid-template-columns: 1fr; } }
+
+/* CTA */
+.cta-final {
+  position: relative; min-height: 60vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 5rem 0;
+  background: var(--color-bg-dark); overflow: hidden;
+}
+.cta-final-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(28,247,153,0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(43,131,237,0.18) 0%, transparent 50%); }
+.cta-final-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+.cta-final h2 { margin-bottom: 1.5rem; }
+.cta-final p { color: var(--color-text-light); margin-bottom: 2.5rem; font-size: 1.1rem; }
+.cta-final-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body data-page="pantallas">
+
+<div id="nav-mount"></div>
+
+<!-- ============ CINEMATIC SCROLL HERO ============ -->
+<div class="cinematic-stage" id="cinematic">
+  <div class="cinematic-pin">
+    <div class="ambient"></div>
+    <div class="particles" data-particles="20"></div>
+
+    <!-- Product image (transforms via JS based on scroll) -->
+    <div class="cinematic-product" id="cinematicProduct">
+      <img src="assets/pantalla-hero-front.jpg" alt="Pantalla interactiva EcoTouch" />
+    </div>
+
+    <!-- Side dot progress -->
+    <div class="scene-progress">
+      <div class="scene-dot active" data-label="Hero"></div>
+      <div class="scene-dot" data-label="Puertos"></div>
+      <div class="scene-dot" data-label="Vista trasera"></div>
+      <div class="scene-dot" data-label="Puertos traseros"></div>
+      <div class="scene-dot" data-label="CTA"></div>
+    </div>
+
+    <!-- Scene 1: Hero centered -->
+    <div class="scene scene-1 active" data-scene="0">
+      <div class="scene-inner">
+        <span class="badge">Solución principal</span>
+        <h1><span class="gradient-text">Pantallas</span> Interactivas</h1>
+        <p class="sub">Para transformar aulas, salas de reunión y auditorios. Premium en cada detalle.</p>
+      </div>
+    </div>
+
+    <!-- Scene 2: Front ports (caption left) -->
+    <div class="scene scene-side left" data-scene="1">
+      <div class="scene-inner">
+        <div class="caption">
+          <span class="label">02 · Conectividad frontal</span>
+          <h2>Todos los puertos al alcance de la mano</h2>
+          <p>USB-C, USB 3.0, HDMI y Touch al frente. Conecta laptops, cámaras y dispositivos sin desarmar la sala.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: Back view (caption right) -->
+    <div class="scene scene-side right" data-scene="2">
+      <div class="scene-inner">
+        <div class="caption">
+          <span class="label">03 · Diseño y robustez</span>
+          <h2>Construcción industrial, acabado premium</h2>
+          <p>Chasis reforzado, anclaje VESA universal, ventilación pasiva silenciosa. Pensada para durar más de una década.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: Back ports (caption left) -->
+    <div class="scene scene-side left" data-scene="3">
+      <div class="scene-inner">
+        <div class="caption">
+          <span class="label">04 · Puertos traseros</span>
+          <h2>Conexiones permanentes ordenadas</h2>
+          <p>HDMI, Ethernet, RS232, RJ45 y audio óptico para integraciones fijas con tu sistema A/V y red corporativa.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: Final CTA -->
+    <div class="scene scene-5" data-scene="4">
+      <div class="scene-inner">
+        <span class="badge">El siguiente paso</span>
+        <h2>Lleva tu presentación al <span class="gradient-text">siguiente nivel</span></h2>
+        <p>Recibe una propuesta personalizada para tu institución en menos de 5 días hábiles.</p>
+        <a href="contacto.html" class="btn btn-primary">Contactar a un asesor</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BENEFITS ============ -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Beneficios reales</span>
+      <h2>Por qué nuestros clientes <span class="gradient-text">repiten</span></h2>
+    </div>
+
+    <div class="benefits-grid stagger">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h4>Plug & Play en aulas y salas</h4>
+        <p>Pantalla, software y accesorios en una sola caja. Tu equipo enciende y empieza a usarla el primer día.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Capacitación docente certificada</h4>
+        <p>Programa de formación incluido. Tus profesores la usan con confianza desde la primera semana.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h4>Respuesta de soporte en 24h</h4>
+        <p>Equipo técnico local. Atención remota, presencial y reposición de equipos cuando hace falta.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+        </div>
+        <h4>Garantía de 5 años</h4>
+        <p>Cobertura extendida sobre hardware. Tu inversión está protegida durante toda su vida útil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPLETE SOLUTION ============ -->
+<section class="solution-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Solución integral</span>
+      <h2>No vendemos equipos.<br/>Entregamos <span class="gradient-text">soluciones completas</span>.</h2>
+    </div>
+
+    <div class="solution-grid stagger">
+      <div class="solution-card reveal">
+        <span class="solution-num">01 · Diagnóstico</span>
+        <h4>Visita técnica gratuita</h4>
+        <p>Evaluamos tus espacios, mediciones, iluminación y necesidades pedagógicas o corporativas.</p>
+      </div>
+      <div class="solution-card reveal">
+        <span class="solution-num">02 · Propuesta</span>
+        <h4>Diseño técnico personalizado</h4>
+        <p>Recomendamos modelo, tamaño, soportes y accesorios óptimos para tu institución.</p>
+      </div>
+      <div class="solution-card reveal">
+        <span class="solution-num">03 · Equipos</span>
+        <h4>Stock local en Ecuador</h4>
+        <p>Marcas líderes con representación oficial. Plazos cortos de entrega y respaldo del fabricante.</p>
+      </div>
+      <div class="solution-card reveal">
+        <span class="solution-num">04 · Instalación</span>
+        <h4>Montaje y comisionamiento</h4>
+        <p>Equipo certificado instala, configura, conecta a red y deja todo listo para usar.</p>
+      </div>
+      <div class="solution-card reveal">
+        <span class="solution-num">05 · Capacitación</span>
+        <h4>Formación incluida</h4>
+        <p>Sesiones presenciales y virtuales para docentes y administradores. Material de apoyo continuo.</p>
+      </div>
+      <div class="solution-card reveal">
+        <span class="solution-num">06 · Soporte</span>
+        <h4>Acompañamiento continuo</h4>
+        <p>Mantenimiento preventivo, soporte técnico y consultoría a largo plazo. Somos tu aliado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST METRICS ============ -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid stagger">
+      <div class="trust-item reveal"><span class="trust-num"><span data-counter="5" data-suffix=" años">0</span></span><span class="trust-lbl">de garantía sobre hardware</span></div>
+      <div class="trust-item reveal"><span class="trust-num">24h</span><span class="trust-lbl">de tiempo de respuesta</span></div>
+      <div class="trust-item reveal"><span class="trust-num">100%</span><span class="trust-lbl">capacitación incluida</span></div>
+      <div class="trust-item reveal"><span class="trust-num">Local</span><span class="trust-lbl">stock y soporte en Ecuador</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPLICATIONS ============ -->
+<section class="apps-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">¿Dónde se instalan?</span>
+      <h2>Para cada <span class="gradient-text">espacio</span> de tu institución</h2>
+    </div>
+
+    <div class="apps-grid stagger">
+      <div class="app-card reveal">
+        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80" alt="Aulas" loading="lazy" />
+        <div class="app-card-content">
+          <span>01</span>
+          <h4>Aulas</h4>
+        </div>
+      </div>
+      <div class="app-card reveal">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80" alt="Salas de reunión" loading="lazy" />
+        <div class="app-card-content">
+          <span>02</span>
+          <h4>Salas de reunión</h4>
+        </div>
+      </div>
+      <div class="app-card reveal">
+        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80" alt="Laboratorios" loading="lazy" />
+        <div class="app-card-content">
+          <span>03</span>
+          <h4>Laboratorios</h4>
+        </div>
+      </div>
+      <div class="app-card reveal">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Auditorios" loading="lazy" />
+        <div class="app-card-content">
+          <span>04</span>
+          <h4>Auditorios</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MINI CASES ============ -->
+<section class="cases-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Casos de éxito</span>
+      <h2>Instituciones que ya <span class="gradient-text">transformaron</span> sus aulas</h2>
+    </div>
+
+    <div class="cases-grid stagger">
+      <div class="case-card reveal">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="USFQ" loading="lazy" />
+        <div class="case-card-body">
+          <span class="cat">Universidad · 2024</span>
+          <h4>USFQ</h4>
+          <p>40+ aulas equipadas con pantallas interactivas Prowise de 75″ + capacitación docente.</p>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="ECOTEC" loading="lazy" />
+        <div class="case-card-body">
+          <span class="cat">Universidad · 2023</span>
+          <h4>Universidad ECOTEC</h4>
+          <p>Renovación tecnológica integral de campus con aulas híbridas y soluciones de videoconferencia.</p>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Thomas More" loading="lazy" />
+        <div class="case-card-body">
+          <span class="cat">Colegio bilingüe · 2024</span>
+          <h4>Colegio Thomas More</h4>
+          <p>Implementación multi-fase del campus con plan de capacitación docente continuo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final">
+  <div class="cta-final-bg"></div>
+  <div class="particles" data-particles="14"></div>
+  <div class="cta-final-content">
+    <span class="eyebrow reveal">Listos para empezar</span>
+    <h2 class="reveal">¿Hablamos de tu <span class="gradient-text">proyecto</span>?</h2>
+    <p class="reveal">Te enviamos una cotización adaptada a tu institución en menos de 5 días hábiles.</p>
+    <div class="cta-final-buttons reveal">
+      <a href="https://wa.me/593999819542" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp directo</a>
+      <a href="contacto.html" class="btn btn-secondary">Solicitar propuesta</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="partials.js"></script>
+<script src="main.js"></script>
+<script>
+// ============ Cinematic scroll controller ============
+(function(){
+  const stage = document.getElementById('cinematic');
+  const product = document.getElementById('cinematicProduct');
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.querySelectorAll('.scene-dot');
+  if (!stage || !product) return;
+
+  // 5 keyframes from the design doc:
+  // 0: hero front  — rotY 0,   scale 1.0
+  // 1: front ports — rotY 0,   scale 1.3, translateY 10vh (camera moves down)
+  // 2: rear view   — rotY 180, scale 1.0
+  // 3: rear ports  — rotY 180, scale 1.3, translateY 10vh
+  // 4: final hero  — rotY 0,   scale 0.85
+  const keyframes = [
+    { rotY: 0,   scale: 1.0,  ty: 0,   filterHue: 0,   brightness: 1 },
+    { rotY: 0,   scale: 1.35, ty: 10,  filterHue: 0,   brightness: 1 },
+    { rotY: 180, scale: 1.0,  ty: 0,   filterHue: 10,  brightness: 0.7 },
+    { rotY: 180, scale: 1.35, ty: 10,  filterHue: 10,  brightness: 0.7 },
+    { rotY: 360, scale: 0.85, ty: 0,   filterHue: 0,   brightness: 1 }
+  ];
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  function updateScroll() {
+    const rect = stage.getBoundingClientRect();
+    const stageHeight = stage.offsetHeight - window.innerHeight;
+    const progress = Math.min(Math.max(-rect.top / stageHeight, 0), 1);
+    const segment = progress * (keyframes.length - 1);
+    const i = Math.floor(segment);
+    const t = segment - i;
+    const a = keyframes[i];
+    const b = keyframes[Math.min(i + 1, keyframes.length - 1)];
+
+    const rotY = lerp(a.rotY, b.rotY, t);
+    const scale = lerp(a.scale, b.scale, t);
+    const ty = lerp(a.ty, b.ty, t);
+    const brightness = lerp(a.brightness, b.brightness, t);
+
+    product.style.transform =
+      `translate(-50%, calc(-50% + ${ty}vh)) rotateY(${rotY}deg) scale(${scale})`;
+    product.style.filter = `drop-shadow(0 30px 60px rgba(0,0,0,0.55)) brightness(${brightness})`;
+
+    // Determine current scene (closest keyframe)
+    const sceneIndex = Math.round(segment);
+    scenes.forEach((s, idx) => s.classList.toggle('active', idx === sceneIndex));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === sceneIndex));
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  updateScroll();
+})();
+</script>
+</body>
+</html>
